@@ -1,9 +1,13 @@
-const YOUR_DISCORD_TOKEN =''; //Discord Token
-const TEXT_CHANNEL_ID=''; //メッセージを出力したいテキストチャンネル
-const VOICE_CHANNEL_ID=''; //ボイスに入りたいボイスチャンネル
-const MESSAGEIN='今日はYYYY年MM月DD日HH時mm分 ボイスに入るねー！　今回はどんなアラームが鳴るかな？';  //ボイスに入るときのメッセージ
-const MESSAGEOUT='今、HH時mm分 大体5分たったのででていくねー！！　良い一日を！'; //ボイスから出るときのメッセージ
-
+//Discord Token
+const YOUR_DISCORD_TOKEN =''; 
+ //メッセージを出力したいテキストチャンネル
+const TEXT_CHANNEL_ID='';
+//ボイスに入りたいボイスチャンネル
+const VOICE_CHANNEL_ID=''; 
+//ボイスに入るときのメッセージ
+const MESSAGEIN='今日はYYYY年MM月DD日HH時mm分 ボイスに入るねー！　今回はどんなアラームが鳴るかな？'; 
+//ボイスから出るときのメッセージ
+const MESSAGEOUT='今、HH時mm分 大体5分たったのででていくねー！！　良い一日を！'; 
 const { Client, GatewayIntentBits } = require('discord.js');
 const {
   joinVoiceChannel,
@@ -32,7 +36,7 @@ cron.schedule('0 6,7,8,9 * * *', async function() {
   const currentTime = moment();
   const textChannel = client.channels.cache.get(TEXT_CHANNEL_ID);
   
-  if (textChannel && textChannel.type === 2) {
+  if (textChannel && (textChannel.type === 2 || textChannel.type === 0)) {
     textChannel.send(
       currentTime.format(
         MESSAGEIN
@@ -63,7 +67,7 @@ cron.schedule('0 6,7,8,9 * * *', async function() {
         if (!shouldStop) {
           playFile(voiceChannel, files[Math.floor(Math.random() * files.length)]);
         } else {
-          if (textChannel && textChannel.type === 2) {
+          if (textChannel && (textChannel.type === 2 || textChannel.type === 0)) {
             const currentTime = moment();
             textChannel.send(
               currentTime.format(

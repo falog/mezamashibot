@@ -1,8 +1,8 @@
 //Discord Token
 const YOUR_DISCORD_TOKEN =''; 
- //メッセージを出力したいテキストチャンネル
+//メッセージを出力したいテキストチャンネル (DiscordのチャンネルIDをコピー)
 const TEXT_CHANNEL_ID='';
-//ボイスに入りたいボイスチャンネル
+//入りたいボイスチャンネル (DiscordのチャンネルIDをコピー)
 const VOICE_CHANNEL_ID=''; 
 //ボイスに入るときのメッセージ
 const MESSAGE_ENTER='今日はYYYY年MM月DD日HH時mm分 ボイスに入るねー！　今回はどんなアラームが鳴るかな？'; 

@@ -5,9 +5,9 @@ const TEXT_CHANNEL_ID='';
 //ボイスに入りたいボイスチャンネル
 const VOICE_CHANNEL_ID=''; 
 //ボイスに入るときのメッセージ
-const MESSAGEIN='今日はYYYY年MM月DD日HH時mm分 ボイスに入るねー！　今回はどんなアラームが鳴るかな？'; 
+const MESSAGE_IN='今日はYYYY年MM月DD日HH時mm分 ボイスに入るねー！　今回はどんなアラームが鳴るかな？'; 
 //ボイスから出るときのメッセージ
-const MESSAGEOUT='今、HH時mm分 大体5分たったのででていくねー！！　良い一日を！'; 
+const MESSAGE_OUT='今、HH時mm分 大体5分たったのででていくねー！！　良い一日を！'; 
 const { Client, GatewayIntentBits } = require('discord.js');
 const {
   joinVoiceChannel,
@@ -39,7 +39,7 @@ cron.schedule('0 6,7,8,9 * * *', async function() {
   if (textChannel && (textChannel.type === 2 || textChannel.type === 0)) {
     textChannel.send(
       currentTime.format(
-        MESSAGEIN
+        MESSAGE_IN
       )
     );
   }
@@ -71,7 +71,7 @@ cron.schedule('0 6,7,8,9 * * *', async function() {
             const currentTime = moment();
             textChannel.send(
               currentTime.format(
-                MESSAGEOUT
+                MESSAGE_OUT
               )
             );
           }

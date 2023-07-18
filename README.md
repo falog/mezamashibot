@@ -16,7 +16,7 @@ node.jsをインストールしてください。
 その後以下のコマンドでpackageのインストールを行ってください。
 > npm install
 
-index.js内の各設定ファイルを設定してください。
+index.js内の以下の変数を設定してください。
 
 YOUR_DISCORD_TOKEN  
 

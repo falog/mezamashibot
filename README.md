@@ -17,6 +17,7 @@ node.jsをインストールしてください。
 > npm install
 
 index.js内の各設定ファイルを設定してください。
+
 YOUR_DISCORD_TOKEN  
 
 TEXT_CHANNEL_ID 

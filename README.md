@@ -27,3 +27,8 @@ VOICE_CHANNEL_ID
 MESSAGEIN 
 
 MESSAGEOUT
+
+
+以下のコマンドで動かします。
+
+> node index.js

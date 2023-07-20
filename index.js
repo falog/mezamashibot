@@ -4,10 +4,9 @@ const YOUR_DISCORD_TOKEN ='';
 const TEXT_CHANNEL_ID='';
 //入りたいボイスチャンネル (DiscordのチャンネルIDをコピー)
 const VOICE_CHANNEL_ID=''; 
-//ボイスに入るときのメッセージ
-const MESSAGE_ENTER='今日はYYYY年MM月DD日HH時mm分 ボイスに入るねー！　今回はどんなアラームが鳴るかな？'; 
-//ボイスから出るときのメッセージ
-const MESSAGE_EXIT='今、HH時mm分 大体5分たったのででていくねー！！　良い一日を！'; 
+// メッセージ
+const MESSAGE = '今日はYYYY年MM月DD日HH時mm分 ボイスに入るねー！　今回はどんなアラームが鳴るかな？'; 
+
 const { Client, GatewayIntentBits } = require('discord.js');
 const {
   joinVoiceChannel,
@@ -32,14 +31,14 @@ const client = new Client({
 
 let shouldStop = false;
 
-cron.schedule('0 6,7,8,9 * * *', async function() {
+cron.schedule('0 8 * * *', async function() {
   const currentTime = moment();
   const textChannel = client.channels.cache.get(TEXT_CHANNEL_ID);
   
-  if (textChannel && (textChannel.type === 2 || textChannel.type === 0)) {
+  if (textChannel && (textChannel.type === 0 || textChannel.type === 2)) {
     textChannel.send(
       currentTime.format(
-        MESSAGE_ENTER
+        MESSAGE
       )
     );
   }
@@ -64,20 +63,7 @@ cron.schedule('0 6,7,8,9 * * *', async function() {
       connection.subscribe(player);
 
       player.once(AudioPlayerStatus.Idle, () => {
-        if (!shouldStop) {
-          playFile(voiceChannel, files[Math.floor(Math.random() * files.length)]);
-        } else {
-          if (textChannel && (textChannel.type === 2 || textChannel.type === 0)) {
-            const currentTime = moment();
-            textChannel.send(
-              currentTime.format(
-                MESSAGE_EXIT
-              )
-            );
-          }
-          shouldStop = false;
-          connection.destroy();
-        }
+        connection.destroy();
       });
 
       player.on('error', error => {
@@ -87,15 +73,11 @@ cron.schedule('0 6,7,8,9 * * *', async function() {
     }
 
     await playFile(voiceChannel, files[Math.floor(Math.random() * files.length)]);
-
-    setTimeout(() => {
-      shouldStop = true;
-    }, 5 * 60 * 1000); // 5 minutes
   }
 });
-
 
 client.on('ready', () => {
   console.log("Running BOT");
 });
+
 client.login(YOUR_DISCORD_TOKEN);
